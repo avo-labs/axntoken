@@ -16,7 +16,7 @@ contract AXNToken {
 
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
-    function MyToken(
+    function AXNToken(
         uint256 initialSupply,
         string tokenName,
         uint8 decimalUnits,
