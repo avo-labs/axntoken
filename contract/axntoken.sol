@@ -53,11 +53,7 @@ contract AXNToken is ERC20Interface{
 	
 	
 	modifier onlyOwner(){
-		if(msg.sender !=owner){
-			throw;
-		}
-		_;
-	
+		require (msg.sender !=owner);
 	}
 	
 	
