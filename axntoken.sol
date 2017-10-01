@@ -1,5 +1,8 @@
 pragma solidity ^0.4.13;
 
+// Copyright Gravitas-Holdings
+// Author: @santoshrout
+
 contract AXNToken {
     /* Public variables of the token */
     string public name;
@@ -56,3 +59,4 @@ contract AXNToken {
         _transfer(_from, _to, _value);
         return true;
     }
+}
