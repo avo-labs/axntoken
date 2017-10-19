@@ -33,7 +33,6 @@ contract Crowdsale {
   uint public afterFifthWeek = 1515751200 ; // 12 jan '18
   uint public closingDate = 1516579199 // Sun, 21 Jan 2018 23:59:59 +0000 
   
-  int8 rate1 = 100;
   int8 rate2 = 75; 
   int8 rate3 = 50; 
   int8 rate4 = 25; 
@@ -41,7 +40,7 @@ contract Crowdsale {
   int8 rate6 = 0; //
   
   event fundingGoalReached(address gravitasWallet, uint amountRaised);
-  event FundTransfer(address backer, uint amount, bool isContribution);
+  event FundTransfer(address investor, uint amount);
   
   if (msg.value < minAmount) {
       throw; // only offers > 1usd / 3000 szabo (0.0000003 eth) will be accepted
@@ -85,7 +84,7 @@ else (){
  }
  
  function CrowdsaleActive() constant public returns (bool) {
-    //Sale runs for 31 days
+  
    
     if (getNow() > closingDate) {
       return false;
