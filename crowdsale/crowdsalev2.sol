@@ -69,15 +69,15 @@ if(CrowdsaleActive() == false){
   
   
 function rate(uint amountRaised, uint timeOfTransaction) returns int8 {
-    if(now > week5 || amountRaised > 240000){ 
+    if(now > fifthWeek || amountRaised > 240000){ 
 	rate = rate6;}
-else if (now >=week4 || amountRaised > 180000){
+else if (now >=fourthWeek || amountRaised > 180000){
 	rate = rate5;}
-else if (now >=week3 || amountRaised > 120000){
+else if (now >=thirdWeek || amountRaised > 120000){
     rate = rate4;}
-else if (now >=week2 || amountRaised > 90000){
+else if (now >=secondWeek || amountRaised > 90000){
     rate = rate3;}
-else if (now >=week1 || amountRaised > 30030){ 
+else if (now >=firstWeek || amountRaised > 30030){ 
     rate = rate2;}
 else (){
     rate = rate1; }
