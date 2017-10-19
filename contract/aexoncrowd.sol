@@ -19,7 +19,7 @@ contract Aexon is PausableToken {
    uint256 public tokensDistributedPresale = 40000000;
 
    // The tokens already used for the ICO buyers
-   uint256 public tokensDistributedCrowdsale = 160 000 000;
+   uint256 public tokensDistributedCrowdsale = 360 000 000;
 
    address public crowdsale;
 
