@@ -12,7 +12,7 @@ contract Crowdsale {
   uint public fundingGoal = 1500015 ether;
   uint public amountRaised = 0; 
   uint public constant price= 330; // 1 ether buys 330 tokens at moment of initialisation
-  uint public minAmount = 3000 szabo; // about the price of one usd if eth > 333 usd
+  uint public minAmount = 3000 szabo; // about the price of one usd if price > 333 usd
   
   
   // amountRaised in ETH decides bonuscap
@@ -25,19 +25,20 @@ contract Crowdsale {
   //start day+time for every bonusweek 
   // note: we are aware that now returns the blocktime , so that people who have aplied earlier might not get in on the bonus. 
   // to ensure you'll get in on the right bonusstructure, we urge you to apply in time. 
+  
   uint public firstweek = 1512727200; //Fri, 08 Dec 2017 10:00:00 +0000 > 8 dec 2017 10:00 GMT 
   uint public secondWeek = 1513332000; // Fri, 15 dec 2017 10:00 
   uint public thirdWeek = 1513936800; //fri 22
   uint public fourthWeek= 1514541600; //fr 29
   uint public fifthWeek = 1515146400; // fr 5 jan 2018
-  uint public afterFifthWeek = 1515751200 ; // 12 jan '18
+  uint public afterFifthWeek = 1515801540 ; // Fri, 12 Jan 2018 23:59:00 +0000 end of presale
   uint public closingDate = 1516579199 // Sun, 21 Jan 2018 23:59:59 +0000 
   
   int8 rate2 = 75; 
   int8 rate3 = 50; 
   int8 rate4 = 25; 
   int8 rate5 = 10; 
-  int8 rate6 = 0; //
+  int8 rate6 = 0; // 
   
   event fundingGoalReached(address gravitasWallet, uint amountRaised);
   event FundTransfer(address investor, uint amount);
@@ -52,7 +53,7 @@ if(CrowdsaleActive() == false){
     uint timeOfTransaction = now; 
     int8 rate = rate(timeOfTransaction, amountRaised);
     uint tokens = msg.value.mul(price); // 1 ether buys 330 axn at moment of writing contract
-    amountRaised
+    
 
     if(rate==rate1)
     {tokens = tokens * 2;} //honderd percent bonus == tokens o.g. * 2
@@ -62,6 +63,7 @@ if(CrowdsaleActive() == false){
     }
     
   balances[msg.sender] = balances[msg.sender].add(tokens);
+  amountRaised.add(tokens); 
   
   function percent(uint256 p) internal returns (uint256) {
     return p.mul(10**16);
@@ -69,17 +71,17 @@ if(CrowdsaleActive() == false){
   
   
 function rate(uint amountRaised, uint timeOfTransaction) returns int8 {
-    if(now > fifthWeek || amountRaised > 240000){ 
-	rate = rate6;}
-else if (now >=fourthWeek || amountRaised > 180000){
-	rate = rate5;}
-else if (now >=thirdWeek || amountRaised > 120000){
+    if(timeOfTransaction > afterfifthWeek || amountRaised > 240000){ 
+  rate = rate6;}
+else if (timeOfTransaction >=fifthWeek || amountRaised > 180000){ // in week 5 people still get bonusses
+  rate = rate5;}
+else if (timeOfTransaction >=fourthWeek || amountRaised > 120000){
     rate = rate4;}
-else if (now >=secondWeek || amountRaised > 90000){
+else if (timeOfTransaction >=thirdWeek || amountRaised > 90000){
     rate = rate3;}
-else if (now >=firstWeek || amountRaised > 30030){ 
+else if (timeOfTransaction >=secondWeek || amountRaised > 30030){ 
     rate = rate2;}
-else (){
+else if(timeOfTransaction>= firstweek){
     rate = rate1; }
  }
  
@@ -96,4 +98,3 @@ else (){
   }
  
 }
-
